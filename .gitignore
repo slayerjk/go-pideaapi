@@ -1,0 +1,9 @@
+# ignore all
+*
+
+# except
+!pideaapi.go
+!cmd/main.go
+!.gitignore
+!README.md
+
