@@ -94,7 +94,7 @@ func GetApiToken(httpClient *http.Client, pideaUrl, userName, UserPassword strin
 	return "", fmt.Errorf("token result of getToken POST request is Empty\n\t%+v", tokenData)
 }
 
-// PrivacyIdea API request: validate check using realm, user, user(POST)
+// PrivacyIdea API request: validate check using realm, user(POST)
 func ValidateCheck(httpClient *http.Client, authToken, pideaUrl, realm, userName, serial, otp string) (bool, error) {
 	var validateResponse ValidateResponse
 
