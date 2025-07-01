@@ -94,7 +94,7 @@ func GetApiToken(httpClient *http.Client, pideaUrl, userName, UserPassword strin
 	return "", fmt.Errorf("token result of getToken POST request is Empty\n\t%+v", tokenData)
 }
 
-// PrivacyIdea API request: validate check using realm, user, user
+// PrivacyIdea API request: validate check using realm, user, user(POST)
 func ValidateCheck(httpClient *http.Client, authToken, pideaUrl, realm, userName, serial, otp string) (bool, error) {
 	var validateResponse ValidateResponse
 
@@ -140,7 +140,7 @@ func ValidateCheck(httpClient *http.Client, authToken, pideaUrl, realm, userName
 	return false, nil
 }
 
-// PrivacyIdea API request: get users't token serial using using user
+// PrivacyIdea API request: get users't token serial using using user(GET)
 func GetUserTokenSerial(httpClient *http.Client, authToken, pideaUrl, realm, userName string) (string, error) {
 	var tokenResponse TokenResponse
 
@@ -177,7 +177,7 @@ func GetUserTokenSerial(httpClient *http.Client, authToken, pideaUrl, realm, use
 	return tokenResponse.Result.Value.Tokens[0].Serial, nil
 }
 
-// Get Pidea users of given realm(GET)
+// PrivacyIdea API request: get list of Pidea users of given realm(GET)
 func GetPideaUsersByRealm(httpClient *http.Client, authToken, pideaUrl, realm string) ([]User, error) {
 	var usersData UsersResponse
 
