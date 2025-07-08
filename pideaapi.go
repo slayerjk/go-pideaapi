@@ -85,13 +85,14 @@ func GetApiToken(httpClient *http.Client, pideaUrl, apiUser, apiUserPassword str
 
 	// decode json response
 	json.NewDecoder(response.Body).Decode(&tokenData)
+	token := tokenData.Result.Value.Token
 
 	// check if empty result
-	if token := tokenData.Result.Value.Token; len(token) != 0 {
-		return token, nil
+	if len(token) == 0 {
+		return "", fmt.Errorf("token result of getToken POST request is Empty\n\t%+v", tokenData)
 	}
 
-	return "", fmt.Errorf("token result of getToken POST request is Empty\n\t%+v", tokenData)
+	return token, nil
 }
 
 // PrivacyIdea API request: validate check using realm, user(POST)
