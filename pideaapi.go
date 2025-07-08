@@ -56,11 +56,11 @@ type ValidateResponse struct {
 }
 
 // PrivacyIdea API request: get Pidea API Token for given user(POST)
-func GetApiToken(httpClient *http.Client, pideaUrl, userName, UserPassword string) (string, error) {
+func GetApiToken(httpClient *http.Client, pideaUrl, apiUser, apiUserPassword string) (string, error) {
 	var tokenData APITokenResponse
 
 	// form URL query
-	query := fmt.Sprintf("%s/auth?username=%s&password=%s", pideaUrl, userName, UserPassword)
+	query := fmt.Sprintf("%s/auth?username=%s&password=%s", pideaUrl, apiUser, apiUserPassword)
 
 	// form request
 	request, err := http.NewRequest(http.MethodPost, query, nil)
