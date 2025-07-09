@@ -65,22 +65,22 @@ func GetApiToken(httpClient *http.Client, pideaUrl, apiUser, apiUserPassword str
 	// form request
 	request, err := http.NewRequest(http.MethodPost, query, nil)
 	if err != nil {
-		return "", fmt.Errorf("failed to Form getToken POST request,\n\t%v", err)
+		return "", fmt.Errorf("failed to Form getToken POST request, %v", err)
 	}
 
 	// do request
 	response, err := httpClient.Do(request)
 	if err != nil {
-		return "", fmt.Errorf("failed to Make getToken POST request,\n\t%v", err)
+		return "", fmt.Errorf("failed to Make getToken POST request, %v", err)
 	}
 	defer response.Body.Close()
 
 	// check status code
 	if response.StatusCode != 200 {
 		if response.StatusCode == 401 {
-			return "", fmt.Errorf("wrong credentials for getToken POST request StatusCode,\n\t%s", response.Status)
+			return "", fmt.Errorf("wrong credentials for getToken POST request StatusCode, %s", response.Status)
 		}
-		return "", fmt.Errorf("check getToken POST request StatusCode,\n\t%s", response.Status)
+		return "", fmt.Errorf("check getToken POST request StatusCode, %s", response.Status)
 	}
 
 	// decode json response
@@ -89,7 +89,7 @@ func GetApiToken(httpClient *http.Client, pideaUrl, apiUser, apiUserPassword str
 
 	// check if empty result
 	if len(token) == 0 {
-		return "", fmt.Errorf("token result of getToken POST request is Empty\n\t%+v", tokenData)
+		return "", fmt.Errorf("token result of getToken POST request is Empty: %+v", tokenData)
 	}
 
 	return token, nil
@@ -149,7 +149,7 @@ func GetUserTokenSerial(httpClient *http.Client, authToken, pideaUrl, realm, use
 	reqUrl := fmt.Sprintf("%s/token?realm=%s&user=%s", pideaUrl, realm, userName)
 	req, err := http.NewRequest(http.MethodGet, reqUrl, nil)
 	if err != nil {
-		return "", fmt.Errorf("failed to form request,\n\t%v", err)
+		return "", fmt.Errorf("failed to form request, %v", err)
 	}
 
 	// set auth header(api key)
@@ -158,13 +158,13 @@ func GetUserTokenSerial(httpClient *http.Client, authToken, pideaUrl, realm, use
 	// do request
 	response, err := httpClient.Do(req)
 	if err != nil {
-		return "", fmt.Errorf("failed to make request,\n\t%v", err)
+		return "", fmt.Errorf("failed to make request, %v", err)
 	}
 	defer response.Body.Close()
 
 	// check status code
 	if response.StatusCode != 200 {
-		return "", fmt.Errorf("bad status code to make request,\n\t%s", response.Status)
+		return "", fmt.Errorf("bad status code to make request,%s", response.Status)
 	}
 
 	// unmarshall json response
@@ -188,7 +188,7 @@ func GetPideaUsersByRealm(httpClient *http.Client, authToken, pideaUrl, realm st
 	// form request
 	request, err := http.NewRequest(http.MethodGet, query, nil)
 	if err != nil {
-		return nil, fmt.Errorf("failed to Form getUsersByRealm GET request,\n\t%v", err)
+		return nil, fmt.Errorf("failed to Form getUsersByRealm GET request, %v", err)
 	}
 
 	// set auth header(api key)
@@ -197,16 +197,16 @@ func GetPideaUsersByRealm(httpClient *http.Client, authToken, pideaUrl, realm st
 	// do request
 	response, err := httpClient.Do(request)
 	if err != nil {
-		return nil, fmt.Errorf("failed to Make getUsersByRealm GET request,\n\t%v", err)
+		return nil, fmt.Errorf("failed to Make getUsersByRealm GET request, %v", err)
 	}
 	defer response.Body.Close()
 
 	// check status code
 	if response.StatusCode != 200 {
 		if response.StatusCode == 401 {
-			return nil, fmt.Errorf("auth failure for getUsersByRealm GET request StatusCode,\n\t%s", response.Status)
+			return nil, fmt.Errorf("auth failure for getUsersByRealm GET request StatusCode, %s", response.Status)
 		}
-		return nil, fmt.Errorf("check getUsersByRealm GET request StatusCode,\n\t%s", response.Status)
+		return nil, fmt.Errorf("check getUsersByRealm GET request StatusCode, %s", response.Status)
 	}
 
 	// decode json response
@@ -217,5 +217,5 @@ func GetPideaUsersByRealm(httpClient *http.Client, authToken, pideaUrl, realm st
 		return users, nil
 	}
 
-	return nil, fmt.Errorf("token result of usersByRealm GET request is Empty\n\t%+v", usersData)
+	return nil, fmt.Errorf("token result of usersByRealm GET request is Empty: %+v", usersData)
 }
