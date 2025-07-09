@@ -134,11 +134,11 @@ func ValidateCheck(httpClient *http.Client, authToken, pideaUrl, realm, userName
 	json.NewDecoder(response.Body).Decode(&validateResponse)
 
 	// check validation result is ok(ACCEPT)
-	if validateResponse.Result.Authentication == "ACCEPT" {
-		return true, nil
+	if validateResponse.Result.Authentication != "ACCEPT" {
+		return false, fmt.Errorf("validateCheck result: %v", validateResponse.Result.Authentication)
 	}
 
-	return false, nil
+	return true, nil
 }
 
 // PrivacyIdea API request: get users't token serial using using user(GET)
