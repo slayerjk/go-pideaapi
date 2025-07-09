@@ -170,7 +170,12 @@ func GetUserTokenSerial(httpClient *http.Client, authToken, pideaUrl, realm, use
 	// unmarshall json response
 	json.NewDecoder(response.Body).Decode(&tokenResponse)
 
-	// check if empty result
+	// check if empty Tokens list
+	if len(tokenResponse.Result.Value.Tokens) == 0 {
+		return "", fmt.Errorf("no tokens info found: %+v", tokenResponse)
+	}
+
+	// check if empty Serial result
 	if len(tokenResponse.Result.Value.Tokens[0].Serial) == 0 {
 		return "", fmt.Errorf("empty result for token")
 	}

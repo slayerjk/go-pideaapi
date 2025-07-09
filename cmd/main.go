@@ -11,11 +11,11 @@ import (
 
 func main() {
 	var (
-		pideaUrl string = "<YOUR PRIVACYIDEA URL"
+		pideaUrl string = "<YOUR PRIVACYIDEA URL>"
 		realm    string = "<YOUR REALM>"
 		user     string = "<USER NAME>"
-		otp      string = "<USER'S OTP"
-		apiUser  string = "<API USER NAME"
+		otp      string = "<USER'S OTP>"
+		apiUser  string = "<API USER NAME>"
 		apiPass  string = "<API USER PASS>"
 	)
 
